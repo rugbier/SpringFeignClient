@@ -1,14 +1,13 @@
 package com.example.spring.cloud.feign.clientservice.model;
 
+import com.example.spring.cloud.feign.clientservice.externalservice.OrderDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Table(name = "clients")
 @Entity
@@ -25,4 +24,7 @@ public class Client {
     private String email;
     private String phone;
     private String id_card;
+
+    @Transient
+    List<OrderDTO> orders;
 }

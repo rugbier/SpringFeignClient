@@ -1,6 +1,8 @@
 package com.example.spring.cloud.feign.clientservice.controller;
 
+import com.example.spring.cloud.feign.clientservice.externalservice.OrderDTO;
 import com.example.spring.cloud.feign.clientservice.model.Client;
+import com.example.spring.cloud.feign.clientservice.model.Order;
 import com.example.spring.cloud.feign.clientservice.repository.ClientRepository;
 import com.example.spring.cloud.feign.clientservice.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,14 @@ public class ClientController {
     @GetMapping(value = "/client")
     public List<Client> getClient() {
 
-        orderService.getOrders();
-
         List<Client> list = new ArrayList<Client>();
-        clientRepository.findAll().forEach(c -> list.add(c));
+        clientRepository.findAll().forEach(c -> {
+            List<OrderDTO> orders = orderService.getOrdersByClient((int)c.getId());
+            c.setOrders(orders);
+            list.add(c);
+        });
+
+
         return list;
     }
 }

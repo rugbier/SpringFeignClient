@@ -13,7 +13,7 @@ public class OrderService {
     private OrderServiceClient orderService;
 
 
-    public List<OrderDTO> getOrders() {
-        return orderService.getOrders();
+    public List<OrderDTO> getOrdersByClient(int clientId) {
+        return orderService.getOrdersByClient(clientId);
     }
 }

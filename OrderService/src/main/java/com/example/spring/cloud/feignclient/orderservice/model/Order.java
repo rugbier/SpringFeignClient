@@ -22,6 +22,7 @@ public class Order {
     @Id
     @GeneratedValue
     private long id;
+    private int client_id;
 //    @OneToMany
 //    @JoinColumn(name = "order_id")
 //    private List<OrderLine> lines;
