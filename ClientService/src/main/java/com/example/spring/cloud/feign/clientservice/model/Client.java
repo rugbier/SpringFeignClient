@@ -1,4 +1,4 @@
-package com.example.spring.cloud.feignclient.clientservice.model;
+package com.example.spring.cloud.feign.clientservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,5 +24,5 @@ public class Client {
     private String surname;
     private String email;
     private String phone;
-    private String idCard;
+    private String id_card;
 }

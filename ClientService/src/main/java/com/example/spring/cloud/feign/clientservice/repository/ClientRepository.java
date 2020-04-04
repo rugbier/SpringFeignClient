@@ -1,6 +1,6 @@
-package com.example.spring.cloud.feignclient.clientservice.repository;
+package com.example.spring.cloud.feign.clientservice.repository;
 
-import com.example.spring.cloud.feignclient.clientservice.model.Client;
+import com.example.spring.cloud.feign.clientservice.model.Client;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

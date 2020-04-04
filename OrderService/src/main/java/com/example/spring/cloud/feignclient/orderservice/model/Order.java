@@ -5,9 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import java.util.List;
 
 
 @Table(name = "orders")
@@ -20,9 +22,9 @@ public class Order {
     @Id
     @GeneratedValue
     private long id;
-    @OneToMany
-    @JoinColumn(name = "order_id")
-    private List<OrderLine> lines;
+//    @OneToMany
+//    @JoinColumn(name = "order_id")
+//    private List<OrderLine> lines;
     private Date order_date;
 
 }
