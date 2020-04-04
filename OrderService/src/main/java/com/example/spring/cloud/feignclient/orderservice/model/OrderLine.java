@@ -1,5 +1,7 @@
 package com.example.spring.cloud.feignclient.orderservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,14 +15,20 @@ import javax.persistence.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class OrderLine {
     @Id
     @GeneratedValue
+    @JsonIgnore
     private long id;
+
     @OneToOne
     @JoinColumn(name = "item_id")
     private Item item;
+
     private int amount;
+
     private float unit_price;
+
     private float tax;
 }

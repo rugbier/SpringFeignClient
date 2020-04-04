@@ -6,3 +6,6 @@ spring:
     username: root
     password: supersecure
   jpa.hibernate.ddl-auto: none
+#  jackson:
+#    serialization:
+#      FAIL_ON_EMPTY_BEANS: false
