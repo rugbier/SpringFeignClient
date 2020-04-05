@@ -1,4 +1,4 @@
-package com.example.spring.cloud.feign.clientservice.externalservice;
+package com.example.spring.cloud.feign.clientservice.dto;
 
 import lombok.Getter;
 import lombok.Setter;

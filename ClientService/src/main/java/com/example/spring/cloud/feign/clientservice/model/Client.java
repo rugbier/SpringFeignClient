@@ -1,6 +1,6 @@
 package com.example.spring.cloud.feign.clientservice.model;
 
-import com.example.spring.cloud.feign.clientservice.externalservice.OrderDTO;
+import com.example.spring.cloud.feign.clientservice.dto.OrderDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
