@@ -6,11 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "items")
 @Entity
@@ -20,15 +19,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class Item {
     @Id
-    @GeneratedValue
-    @JsonIgnore
-    private long id;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
-
     private String description;
-
-    @JsonIgnore
     private Date date_added;
-
 }

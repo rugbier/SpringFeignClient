@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,16 +20,13 @@ import java.util.List;
 @Builder
 public class Order {
     @Id
-    @GeneratedValue
-    @JsonIgnore
-    private long id;
-
-    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private int client_id;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    private List<OrderLine> lines;
+    private List<OrderLine> lines = new ArrayList<>();
 
     private Date order_date;
 
