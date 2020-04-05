@@ -14,6 +14,6 @@ import java.util.List;
              configuration = OrderServiceClientConfiguration.class,
              fallback = OrderServiceClientFallBack.class)
 public interface OrderServiceClient {
-    @RequestMapping(method = RequestMethod.GET, value = "/order/{clientId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/client/{clientId}/order")
     List<OrderDTO> getOrdersByClient(@PathVariable("clientId") int clientId);
 }
