@@ -3,12 +3,10 @@ package com.example.spring.cloud.feignclient.orderservice.service;
 import com.example.spring.cloud.feignclient.orderservice.model.Order;
 import com.example.spring.cloud.feignclient.orderservice.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class OrderService {

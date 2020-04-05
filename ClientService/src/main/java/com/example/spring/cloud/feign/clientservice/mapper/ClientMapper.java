@@ -9,7 +9,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface ClientMapper {
 
-    ClientMapper INSTANCE = Mappers.getMapper( ClientMapper.class );
+    ClientMapper INSTANCE = Mappers.getMapper(ClientMapper.class);
 
     @Mapping(target = "orders", ignore = true)
     ClientDTO clientToDTO(Client client);

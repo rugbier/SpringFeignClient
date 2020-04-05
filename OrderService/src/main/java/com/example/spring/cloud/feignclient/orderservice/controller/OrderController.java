@@ -1,15 +1,12 @@
 package com.example.spring.cloud.feignclient.orderservice.controller;
 
-import com.example.spring.cloud.feignclient.orderservice.model.Item;
+import com.example.spring.cloud.feignclient.orderservice.dto.OrderDTO;
+import com.example.spring.cloud.feignclient.orderservice.mapper.OrderMapper;
 import com.example.spring.cloud.feignclient.orderservice.model.Order;
-import com.example.spring.cloud.feignclient.orderservice.model.OrderLine;
-import com.example.spring.cloud.feignclient.orderservice.repository.OrderRepository;
 import com.example.spring.cloud.feignclient.orderservice.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -24,13 +21,13 @@ public class OrderController {
     }
 
     @GetMapping(value = "/client/{clientId}/order")
-    public List<Order> getOrdersByClient(@PathVariable("clientId") int clientId) {
-        return orderService.getOrdersByClient(clientId);
+    public List<OrderDTO> getOrdersByClient(@PathVariable("clientId") int clientId) {
+        return  OrderMapper.INSTANCE.toOrderDTOList(orderService.getOrdersByClient(clientId));
     }
 
     @GetMapping(value = "/client/{clientId}/order/{orderId}")
-    public Order getOrderByIdAndClient(@PathVariable("clientId") int clientId, @PathVariable("orderId") int orderId) {
-        return orderService.getOrderByIdAndClient(clientId, orderId);
+    public OrderDTO getOrderByIdAndClient(@PathVariable("clientId") int clientId, @PathVariable("orderId") int orderId) {
+        return  OrderMapper.INSTANCE.toOrderDTO(orderService.getOrderByIdAndClient(clientId, orderId));
     }
 
     @GetMapping(value = "/client/{clientId}/order/{orderId}/total")
@@ -42,6 +39,5 @@ public class OrderController {
     public float getTotalOfClient(@PathVariable("clientId") int clientId) {
         return orderService.getTotalOfClient(clientId);
     }
-
 
 }
