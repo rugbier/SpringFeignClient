@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Table(name = "orders")
@@ -30,4 +31,11 @@ public class Order {
 
     private Date order_date;
 
+    public float getTotal(){
+        return lines.stream()
+                .map(x -> x.getUnit_price() *
+                        (1 + x.getTax()) *
+                        x.getAmount())
+                .collect(Collectors.summingDouble(Float::doubleValue)).floatValue();
+    }
 }

@@ -14,4 +14,7 @@ import java.util.List;
 public interface OrderRepository extends CrudRepository<Order, Integer> {
     @Query("SELECT o FROM Order o WHERE o.client_id = :clientId")
     List<Order> findOrdersByClientId(@Param("clientId") int clientId);
+
+    @Query("SELECT o FROM Order o WHERE o.client_id = :clientId AND o.id = :orderId")
+    Order findByIdAndClient(@Param("clientId")int clientId, @Param("orderId") long orderId);
 }
