@@ -6,7 +6,6 @@ import java.util.Date;
 
 @Data
 public class ItemDTO {
-    private Long id;
     private String name;
     private String description;
     private Date date_added;

@@ -4,10 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
 public class OrderDTO {
-    private long id;
     private Date order_date;
+    private List<OrderLineDTO> lines;
 }
