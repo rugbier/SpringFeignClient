@@ -1,6 +1,8 @@
 package com.example.spring.cloud.feign.clientservice.hystrix;
 
 import com.example.spring.cloud.feign.clientservice.dto.OrderDTO;
+import com.example.spring.cloud.feign.clientservice.dto.TotalClientOrdersDTO;
+import com.example.spring.cloud.feign.clientservice.dto.TotalOrderDTO;
 import com.example.spring.cloud.feign.clientservice.externalservice.OrderServiceClient;
 import org.springframework.stereotype.Component;
 
@@ -26,12 +28,12 @@ public class OrderServiceClientFallBack implements OrderServiceClient {
     }
 
     @Override
-    public float getTotalOfOrder(int clientId, int orderId) {
-        return 0;
+    public TotalOrderDTO getTotalOfOrder(int clientId, int orderId) {
+        return null;
     }
 
     @Override
-    public float getTotalOfClient(int clientId) {
-        return 0;
+    public TotalClientOrdersDTO getTotalOfClient(int clientId) {
+        return null;
     }
 }

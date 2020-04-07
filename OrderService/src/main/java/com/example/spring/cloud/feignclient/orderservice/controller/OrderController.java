@@ -1,6 +1,8 @@
 package com.example.spring.cloud.feignclient.orderservice.controller;
 
 import com.example.spring.cloud.feignclient.orderservice.dto.OrderDTO;
+import com.example.spring.cloud.feignclient.orderservice.dto.TotalClientOrdersDTO;
+import com.example.spring.cloud.feignclient.orderservice.dto.TotalOrderDTO;
 import com.example.spring.cloud.feignclient.orderservice.mapper.OrderMapper;
 import com.example.spring.cloud.feignclient.orderservice.model.Order;
 import com.example.spring.cloud.feignclient.orderservice.service.OrderService;
@@ -36,12 +38,12 @@ public class OrderController {
     }
 
     @GetMapping(value = "/order/{orderId}/total")
-    public float getTotalOfOrder(@RequestParam("clientId") int clientId, @PathVariable("orderId") int orderId) {
+    public TotalOrderDTO getTotalOfOrder(@RequestParam("clientId") int clientId, @PathVariable("orderId") int orderId) {
         return orderService.getTotalOfOrder(clientId, orderId);
     }
 
     @GetMapping(value = "/order/total")
-    public float getTotalOfClient(@RequestParam("clientId") int clientId) {
+    public TotalClientOrdersDTO getTotalOfClient(@RequestParam("clientId") int clientId) {
         return orderService.getTotalOfClient(clientId);
     }
 

@@ -2,6 +2,8 @@ package com.example.spring.cloud.feign.clientservice.externalservice;
 
 import com.example.spring.cloud.feign.clientservice.configuration.OrderServiceClientConfiguration;
 import com.example.spring.cloud.feign.clientservice.dto.OrderDTO;
+import com.example.spring.cloud.feign.clientservice.dto.TotalClientOrdersDTO;
+import com.example.spring.cloud.feign.clientservice.dto.TotalOrderDTO;
 import com.example.spring.cloud.feign.clientservice.hystrix.OrderServiceClientFallBack;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +25,8 @@ public interface OrderServiceClient {
     OrderDTO getOrderByIdAndClient(@RequestParam("clientId") int clientId, @PathVariable("orderId") int orderId);
 
     @RequestMapping(method = RequestMethod.GET, value = "/order/{orderId}/total")
-    float getTotalOfOrder(@RequestParam("clientId") int clientId, @PathVariable("orderId") int orderId);
+    TotalOrderDTO getTotalOfOrder(@RequestParam("clientId") int clientId, @PathVariable("orderId") int orderId);
 
     @RequestMapping(method = RequestMethod.GET, value = "/order/total")
-    float getTotalOfClient(@RequestParam("clientId") int clientId);
+    TotalClientOrdersDTO getTotalOfClient(@RequestParam("clientId") int clientId);
 }

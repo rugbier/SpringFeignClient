@@ -1,15 +1,15 @@
 package com.example.spring.cloud.feign.clientservice.controller;
 
 import com.example.spring.cloud.feign.clientservice.dto.ClientDTO;
+import com.example.spring.cloud.feign.clientservice.dto.OrderDTO;
+import com.example.spring.cloud.feign.clientservice.dto.TotalClientOrdersDTO;
+import com.example.spring.cloud.feign.clientservice.dto.TotalOrderDTO;
 import com.example.spring.cloud.feign.clientservice.service.ClientService;
 import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,8 +27,23 @@ public class ClientController {
     }
 
     @PostMapping(value = "/client")
-    public ClientDTO saveClient(@RequestBody ClientDTO clientDto) {
+    public ClientDTO saveClientAndOrder(@RequestBody ClientDTO clientDto) {
         if (clientDto.getId() == null) return clientService.saveClientWithOrder(clientDto);
         else return clientService.saveOrderForClient(clientDto);
+    }
+
+    @GetMapping(value = "/client/{clientId}/order/{orderId}")
+    public OrderDTO getOrderFromClient(@PathVariable("clientId") int clientId, @PathVariable("orderId") int orderId){
+        return clientService.getOrderFromClient(clientId, orderId);
+    }
+
+    @GetMapping(value = "/client/{clientId}/order/{orderId}/total")
+    public TotalOrderDTO getTotalOfOrder(@PathVariable("clientId") int clientId, @PathVariable("orderId") int orderId){
+        return clientService.getTotalOfOrder(clientId, orderId);
+    }
+
+    @GetMapping(value = "/client/{clientId}/order/total")
+    public TotalClientOrdersDTO getTotalOfClient(@PathVariable("clientId") int clientId){
+        return clientService.getTotalOfClient(clientId);
     }
 }
