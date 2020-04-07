@@ -19,7 +19,7 @@ public class OrderLine {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne
     private Item item;
     private int amount;
     private float unit_price;

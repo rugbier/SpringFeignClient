@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "clients")
@@ -17,8 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Client {
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
     private String surname;
     private String email;
@@ -26,5 +27,5 @@ public class Client {
     private String id_card;
 
     @Transient
-    List<OrderDTO> orders;
+    List<OrderDTO> orders = new ArrayList<>();
 }

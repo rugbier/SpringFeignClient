@@ -11,7 +11,10 @@ public interface ClientMapper {
 
     ClientMapper INSTANCE = Mappers.getMapper(ClientMapper.class);
 
-    @Mapping(target = "orders", ignore = true)
-    ClientDTO clientToDTO(Client client);
+//    @Mapping(target = "orders", ignore = true)
+    ClientDTO toClientDTO(Client client);
+
+//    @Mapping(target = "orders", ignore = true)
+    Client toClient(ClientDTO client);
 }
 

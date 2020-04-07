@@ -9,6 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 public class OrderDTO {
+    private Long client_id;
     private Date order_date;
     private List<OrderLineDTO> lines;
 }

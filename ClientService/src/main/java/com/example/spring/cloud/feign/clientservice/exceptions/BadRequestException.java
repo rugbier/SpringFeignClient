@@ -1,6 +1,6 @@
 package com.example.spring.cloud.feign.clientservice.exceptions;
 
-public class BadRequestException extends Exception {
+public class BadRequestException extends RuntimeException {
 
     public BadRequestException() {
     }

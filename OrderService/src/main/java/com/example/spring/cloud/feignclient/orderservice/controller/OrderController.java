@@ -18,30 +18,30 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping(value = "/order")
-    public Order saveOrder(@RequestBody Order order) {
+    public OrderDTO saveOrder(@RequestBody OrderDTO order) {
         return orderService.saveOrder(order);
     }
 
-    @GetMapping(value = "/client/{clientId}/order")
-    public List<OrderDTO> getOrdersByClient(@PathVariable("clientId") int clientId) throws Exception {
+    @GetMapping(value = "/order")
+    public List<OrderDTO> getOrdersByClient(@RequestParam("clientId") int clientId) throws Exception {
         if (status.appStatus.equals(status.ERROR))
             throw new Exception("There was an exception");
 
         return  OrderMapper.INSTANCE.toOrderDTOList(orderService.getOrdersByClient(clientId));
     }
 
-    @GetMapping(value = "/client/{clientId}/order/{orderId}")
-    public OrderDTO getOrderByIdAndClient(@PathVariable("clientId") int clientId, @PathVariable("orderId") int orderId) {
+    @GetMapping(value = "order/{orderId}")
+    public OrderDTO getOrderByIdAndClient(@RequestParam("clientId") int clientId, @PathVariable("orderId") int orderId) {
         return  OrderMapper.INSTANCE.toOrderDTO(orderService.getOrderByIdAndClient(clientId, orderId));
     }
 
-    @GetMapping(value = "/client/{clientId}/order/{orderId}/total")
-    public float getTotalOfOrder(@PathVariable("clientId") int clientId, @PathVariable("orderId") int orderId) {
+    @GetMapping(value = "/order/{orderId}/total")
+    public float getTotalOfOrder(@RequestParam("clientId") int clientId, @PathVariable("orderId") int orderId) {
         return orderService.getTotalOfOrder(clientId, orderId);
     }
 
-    @GetMapping(value = "/client/{clientId}/total")
-    public float getTotalOfClient(@PathVariable("clientId") int clientId) {
+    @GetMapping(value = "/order/total")
+    public float getTotalOfClient(@RequestParam("clientId") int clientId) {
         return orderService.getTotalOfClient(clientId);
     }
 

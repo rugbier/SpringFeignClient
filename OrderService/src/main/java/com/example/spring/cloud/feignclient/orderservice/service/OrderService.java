@@ -1,5 +1,7 @@
 package com.example.spring.cloud.feignclient.orderservice.service;
 
+import com.example.spring.cloud.feignclient.orderservice.dto.OrderDTO;
+import com.example.spring.cloud.feignclient.orderservice.mapper.OrderMapper;
 import com.example.spring.cloud.feignclient.orderservice.model.Order;
 import com.example.spring.cloud.feignclient.orderservice.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,9 @@ public class OrderService {
         return list;
     }
 
-    public Order saveOrder(Order order){
-        return orderRepository.save(order);
+    public OrderDTO saveOrder(OrderDTO orderDto){
+        Order order = OrderMapper.INSTANCE.toOrder(orderDto);
+        return OrderMapper.INSTANCE.toOrderDTO(orderRepository.save(order));
     }
 
     public Order getOrderByIdAndClient(int clientId, int orderId) {

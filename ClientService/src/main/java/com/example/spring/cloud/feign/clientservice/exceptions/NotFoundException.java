@@ -1,6 +1,6 @@
 package com.example.spring.cloud.feign.clientservice.exceptions;
 
-public class NotFoundException extends Exception {
+public class NotFoundException extends RuntimeException {
 
     public NotFoundException() {
     }

@@ -16,4 +16,8 @@ public class OrderService {
     public List<OrderDTO> getOrdersByClient(int clientId) {
         return orderService.getOrdersByClient(clientId);
     }
+
+    public OrderDTO saveOrder(OrderDTO order){
+        return orderService.saveOrder(order);
+    }
 }

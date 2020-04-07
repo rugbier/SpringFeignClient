@@ -12,6 +12,7 @@ public interface OrderMapper {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
     OrderDTO toOrderDTO(Order order);
+    Order toOrder(OrderDTO order);
 
     List<OrderDTO> toOrderDTOList(List<Order> lines);
 
