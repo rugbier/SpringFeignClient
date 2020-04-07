@@ -13,6 +13,7 @@
         <module>OrderService</module>
         <module>NotificationService</module>
         <module>InvoiceService</module>
+        <module>ServiceTransport</module>
     </modules>
 
 </project>

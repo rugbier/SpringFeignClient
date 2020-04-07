@@ -1,9 +1,9 @@
 package com.example.spring.cloud.feign.clientservice.externalservice;
 
 import com.example.spring.cloud.feign.clientservice.configuration.OrderServiceClientConfiguration;
-import com.example.spring.cloud.feign.clientservice.dto.OrderDTO;
-import com.example.spring.cloud.feign.clientservice.dto.TotalClientOrdersDTO;
-import com.example.spring.cloud.feign.clientservice.dto.TotalOrderDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.OrderDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.TotalClientOrdersDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.TotalOrderDTO;
 import com.example.spring.cloud.feign.clientservice.hystrix.OrderServiceClientFallBack;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;

@@ -1,14 +1,11 @@
 package com.example.spring.cloud.feign.clientservice.controller;
 
-import com.example.spring.cloud.feign.clientservice.dto.ClientDTO;
-import com.example.spring.cloud.feign.clientservice.dto.OrderDTO;
-import com.example.spring.cloud.feign.clientservice.dto.TotalClientOrdersDTO;
-import com.example.spring.cloud.feign.clientservice.dto.TotalOrderDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.ClientDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.OrderDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.TotalClientOrdersDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.TotalOrderDTO;
 import com.example.spring.cloud.feign.clientservice.service.ClientService;
-import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,9 +1,8 @@
 package com.example.spring.cloud.feign.clientservice.mapper;
 
-import com.example.spring.cloud.feign.clientservice.dto.ClientDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.ClientDTO;
 import com.example.spring.cloud.feign.clientservice.model.Client;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper

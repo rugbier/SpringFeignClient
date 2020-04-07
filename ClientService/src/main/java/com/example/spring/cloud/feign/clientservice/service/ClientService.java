@@ -1,16 +1,14 @@
 package com.example.spring.cloud.feign.clientservice.service;
 
-import com.example.spring.cloud.feign.clientservice.dto.ClientDTO;
-import com.example.spring.cloud.feign.clientservice.dto.OrderDTO;
-import com.example.spring.cloud.feign.clientservice.dto.TotalClientOrdersDTO;
-import com.example.spring.cloud.feign.clientservice.dto.TotalOrderDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.ClientDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.OrderDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.TotalClientOrdersDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.TotalOrderDTO;
 import com.example.spring.cloud.feign.clientservice.mapper.ClientMapper;
 import com.example.spring.cloud.feign.clientservice.model.Client;
 import com.example.spring.cloud.feign.clientservice.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;

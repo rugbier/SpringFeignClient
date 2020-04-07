@@ -3,3 +3,6 @@ ClientService/target/
 OrderService/target/
 SpringFeignClient.iml
 *.iml
+ServiceTransport/target/
+InvoiceService/target/
+NotificationService/target/

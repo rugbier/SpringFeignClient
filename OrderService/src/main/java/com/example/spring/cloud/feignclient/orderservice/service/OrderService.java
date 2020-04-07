@@ -1,8 +1,8 @@
 package com.example.spring.cloud.feignclient.orderservice.service;
 
-import com.example.spring.cloud.feignclient.orderservice.dto.OrderDTO;
-import com.example.spring.cloud.feignclient.orderservice.dto.TotalClientOrdersDTO;
-import com.example.spring.cloud.feignclient.orderservice.dto.TotalOrderDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.OrderDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.TotalClientOrdersDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.TotalOrderDTO;
 import com.example.spring.cloud.feignclient.orderservice.mapper.OrderMapper;
 import com.example.spring.cloud.feignclient.orderservice.model.Order;
 import com.example.spring.cloud.feignclient.orderservice.model.OrderLine;

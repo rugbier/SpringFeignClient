@@ -1,4 +1,4 @@
-package com.example.spring.cloud.feignclient.orderservice.dto;
+package com.example.spring.cloud.feignclient.servicetransport.dto;
 
 import lombok.Data;
 

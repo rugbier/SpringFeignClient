@@ -1,6 +1,6 @@
 package com.example.spring.cloud.feignclient.orderservice.mapper;
 
-import com.example.spring.cloud.feignclient.orderservice.dto.OrderDTO;
+import com.example.spring.cloud.feignclient.servicetransport.dto.OrderDTO;
 import com.example.spring.cloud.feignclient.orderservice.model.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
