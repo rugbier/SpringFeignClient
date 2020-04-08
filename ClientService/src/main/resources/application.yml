@@ -11,4 +11,11 @@ spring:
     use-new-id-generator-mappings: false
 feign:
   hystrix:
-    enabled: false
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+      base-path: /
