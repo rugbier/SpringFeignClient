@@ -1,0 +1,359 @@
+Arrancar Kska en docker
+
+https://itnext.io/how-to-install-kafka-using-docker-a2b7c746cbdc
+
+
+1. Crear red interna de docker
+	docker network create kafka-net --driver bridge
+	
+2. Ejecutar el contendeor de zookeper
+	docker rm zookeeper-server
+	docker run --name zookeeper-server -p 2181:2181 --network kafka-net -e ALLOW_ANONYMOUS_LOGIN=yes bitnami/zookeeper:latest -d 
+
+3. Ejecutamos el contenedor de kafka
+	docker rm kafka-server
+	docker run --name kafka-server --network kafka-net -e ALLOW_PLAINTEXT_LISTENER=yes -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper-server:2181 -e KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 -p 9092:9092 bitnami/kafka
+	
+	
+
+Todo Junto
+
+docker rm zookeeper-server; docker run --name zookeeper-server -p 2181:2181 --network kafka-net -e ALLOW_ANONYMOUS_LOGIN=yes bitnami/zookeeper
+
+docker rm kafka-server; docker run --name kafka-server --network kafka-net -e ALLOW_PLAINTEXT_LISTENER=yes -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper-server:2181 -e KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 -p 9092:9092 bitnami/kafka
+
+
+
+
+{
+	"id": "1234",
+	"name": "Lucas",
+	"surname": "Poggi",
+	"email": "rugbier@hotmail.com",
+	"address": "Calle Haroldo Parres 7",
+	"birth": "1985-01-03",
+	"creationDate": "2020-03-22T16:48:00",
+	"order":{
+		"id": "456",
+		"orderDate": "2020-03-15T15:01:15",
+		"total": 156.8,
+		"totalTaxes": 14.5,
+		"items":[{
+				"id": "1",
+				"name": "Tomatoes",
+				"price": 45.4,
+				"taxes": 9.2,
+				"quantity": 3
+				}, {
+				"id": "2",
+				"name": "Toilet Paper",
+				"price": 410.6,
+				"taxes": 3.4,
+				"quantity": 300
+				},{
+				"id": "3",
+				"name": "Orange",
+				"price": 16.6,
+				"taxes": 3.4,
+				"quantity": 6
+				}]
+	}
+}
+
+
+
+
+
+docker run -d --rm -p 9000:9000 -e KAFKA_BROKERCONNECT=localhost:9092,localhost:9092 -e JVM_OPTS="-Xms32M -Xmx64M" -e SERVER_SERVLET_CONTEXTPATH="/" obsidiandynamics/kafdrop:latest
+
+
+Mysql y webconsole
+************************
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=supersecure -d mysql
+
+docker run --name myadmin -d --link ysql-container:db -p 8080:80 phpmyadmin/phpmyadmin
+
+
+Scripts para Crear la base de datos
+
+CREATE DATABASE feignclientdb; 
+
+USE feignclientdb; 
+
+CREATE TABLE `feignclientdb`.`clients` ( 
+	`id` INT NOT NULL AUTO_INCREMENT , 
+	`name` VARCHAR(255) NOT NULL , 
+	`surname` VARCHAR(255) NOT NULL , 
+	`email` VARCHAR(255) NOT NULL , 
+	`phone` VARCHAR(255) NOT NULL , 
+	`id_card` VARCHAR(255) NOT NULL , 
+	PRIMARY KEY (`id`)
+) ENGINE = InnoDB; 
+
+
+INSERT INTO `feignclientdb`.`clients`(`name`, `surname`, `email`, `phone`, `id_card`) VALUES ( 'Lucas', 'Poggi', 'lucas@poggi.com', '+34654987321', '45783514A');
+INSERT INTO `feignclientdb`.`clients`(`name`, `surname`, `email`, `phone`, `id_card`) VALUES ( 'Flavius', 'Platon', 'flavius@platon.com', '+34658654123', '45678912R');
+INSERT INTO `feignclientdb`.`clients`(`name`, `surname`, `email`, `phone`, `id_card`) VALUES ( 'Piotr', 'Nizo', 'piotr@nizo.com', '+34612354786', '95467835W');
+INSERT INTO `feignclientdb`.`clients`(`name`, `surname`, `email`, `phone`, `id_card`) VALUES ( 'Oriol', 'Ylla', 'oriol@ylla.com', '+34652147852', '123456789F');
+INSERT INTO `feignclientdb`.`clients`(`name`, `surname`, `email`, `phone`, `id_card`) VALUES ( 'Albert', 'Marieges', 'albert@marieges.com', '+34634852951', '45263579R');
+INSERT INTO `feignclientdb`.`clients`(`name`, `surname`, `email`, `phone`, `id_card`) VALUES ( 'Marco', 'Magalhaes', 'marco@magalhaes.com', '+34685753159', '45632987J');
+INSERT INTO `feignclientdb`.`clients`(`name`, `surname`, `email`, `phone`, `id_card`) VALUES ( 'Jordi', 'Alvaro', 'jordi@alvaro.com', '+34675486153', '65421598O');
+
+
+CREATE TABLE `feignclientdb`.`items` ( 
+	`id` INT NOT NULL AUTO_INCREMENT , 
+	`name` VARCHAR(255) NOT NULL , 
+	`description` VARCHAR(255) NOT NULL , 
+	`date_added` DATETIME NOT NULL , 
+	PRIMARY KEY (`id`)
+) ENGINE = InnoDB; 
+
+
+INSERT INTO `feignclientdb`.`items`(`name`, `description`, `date_added`) VALUES ( 'Rice', 'Rice description', now());
+INSERT INTO `feignclientdb`.`items`(`name`, `description`, `date_added`) VALUES ( 'Pasta', 'Pasta description', now());
+INSERT INTO `feignclientdb`.`items`(`name`, `description`, `date_added`) VALUES ( 'Syrup', 'Syrup description', now());
+INSERT INTO `feignclientdb`.`items`(`name`, `description`, `date_added`) VALUES ( 'Parmesan', 'Parmesan description', now());
+INSERT INTO `feignclientdb`.`items`(`name`, `description`, `date_added`) VALUES ( 'Toilet paper', 'Toilet paper description', now());
+INSERT INTO `feignclientdb`.`items`(`name`, `description`, `date_added`) VALUES ( 'Crackers', 'Crackers description', now());
+INSERT INTO `feignclientdb`.`items`(`name`, `description`, `date_added`) VALUES ( 'Margarine', 'Margarine description', now());
+INSERT INTO `feignclientdb`.`items`(`name`, `description`, `date_added`) VALUES ( 'Fresh bread', 'Fresh bread description', now());
+INSERT INTO `feignclientdb`.`items`(`name`, `description`, `date_added`) VALUES ( 'Fruit juice', 'Fruit juice description', now());
+INSERT INTO `feignclientdb`.`items`(`name`, `description`, `date_added`) VALUES ( 'Oranges', 'Oranges description', now());
+INSERT INTO `feignclientdb`.`items`(`name`, `description`, `date_added`) VALUES ( 'Avocados', 'Avocados description', now());
+
+
+CREATE TABLE `feignclientdb`.`orders` ( 
+	`id` INT NOT NULL AUTO_INCREMENT , 
+	`client_id` INT(255) NOT NULL , 
+	`order_date` DATETIME NOT NULL , 
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
+) ENGINE = InnoDB; 
+
+
+INSERT INTO `feignclientdb`.`orders`(`client_id`, `order_date`) VALUES ( 1, now());
+INSERT INTO `feignclientdb`.`orders`(`client_id`, `order_date`) VALUES ( 2, now());
+INSERT INTO `feignclientdb`.`orders`(`client_id`, `order_date`) VALUES ( 2, now());
+INSERT INTO `feignclientdb`.`orders`(`client_id`, `order_date`) VALUES ( 3, now());
+INSERT INTO `feignclientdb`.`orders`(`client_id`, `order_date`) VALUES ( 3, now());
+INSERT INTO `feignclientdb`.`orders`(`client_id`, `order_date`) VALUES ( 4, now());
+INSERT INTO `feignclientdb`.`orders`(`client_id`, `order_date`) VALUES ( 4, now());
+INSERT INTO `feignclientdb`.`orders`(`client_id`, `order_date`) VALUES ( 4, now());
+INSERT INTO `feignclientdb`.`orders`(`client_id`, `order_date`) VALUES ( 4, now());
+INSERT INTO `feignclientdb`.`orders`(`client_id`, `order_date`) VALUES ( 5, now());
+INSERT INTO `feignclientdb`.`orders`(`client_id`, `order_date`) VALUES ( 5, now());
+INSERT INTO `feignclientdb`.`orders`(`client_id`, `order_date`) VALUES ( 6, now());
+INSERT INTO `feignclientdb`.`orders`(`client_id`, `order_date`) VALUES ( 7, now());
+INSERT INTO `feignclientdb`.`orders`(`client_id`, `order_date`) VALUES ( 1, now());
+INSERT INTO `feignclientdb`.`orders`(`client_id`, `order_date`) VALUES ( 2, now());
+
+
+CREATE TABLE `feignclientdb`.`order_lines` ( 
+	`id` INT NOT NULL AUTO_INCREMENT , 
+	`order_id` INT NULL , 
+	`item_id` INT NULL , 
+	`amount` INT NOT NULL , 
+	`unit_price` FLOAT NOT NULL , 
+	`tax` FLOAT NOT NULL , 
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+	FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE
+) ENGINE = InnoDB; 
+
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 1, 1,   1, 1.35, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 1, 2,   1, 1.25, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 1, 3,   2, 1.14, 0.18);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 1, 10,  4, 1.25, 0.19);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 2, 5,   1, 1.75, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 2, 6,   3, 1.69, 0.16);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 3, 7,   2, 1.46, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 3, 8,   1, 1.14, 0.15);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 3, 9,   2, 1.35, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 4, 6,   1, 1.12, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 4, 1,   5, 1.05, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 5, 2,   1, 1.92, 0.15);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 6, 6,   3, 1.93, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 6, 9,   1, 1.45, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 7, 4,   1, 1.26, 0.15);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 7, 5,   1, 1.63, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 7, 9,   1, 1.21, 0.15);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 7, 11,  1, 1.36, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 7, 10,  2, 1.26, 0.15);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 7, 8,   4, 1.48, 0.19);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 7, 2,   3, 1.35, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 8, 1,   3, 1.42, 0.16);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 8, 2,   3, 1.44, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 9, 3,   2, 1.65, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 9, 4,   1, 1.95, 0.16);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 9, 5,   3, 1.74, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 10, 9,  1, 1.71, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 10, 5,  1, 1.82, 0.19);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 11, 7,  2, 1.86, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 12, 6,  2, 1.96, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 13, 4,  1, 1.33, 0.16);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 14, 3,  3, 1.25, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 15, 2,  2, 1.54, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 15, 9,  3, 1.62, 0.11);
+INSERT INTO `feignclientdb`.`order_lines`(`order_id`, `item_id`, `amount`, `unit_price`, `tax`) VALUES ( 15, 10, 1, 1.13, 0.15);
+
+
+CREATE TABLE `feignclientdb`.`invoices` ( 
+	`id` INT NOT NULL AUTO_INCREMENT , 
+	`client_id` INT NOT NULL , 
+	`order_id` INT NOT NULL , 
+	`date_invoice` DATETIME NOT NULL , 
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE,
+	FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+) ENGINE = InnoDB; 
+
+INSERT INTO `feignclientdb`.`invoices`(`order_id`, `client_id`, `date_invoice`) VALUES ( 1, 1, now());
+INSERT INTO `feignclientdb`.`invoices`(`order_id`, `client_id`, `date_invoice`) VALUES ( 4, 3, now());
+INSERT INTO `feignclientdb`.`invoices`(`order_id`, `client_id`, `date_invoice`) VALUES ( 7, 4, now());
+INSERT INTO `feignclientdb`.`invoices`(`order_id`, `client_id`, `date_invoice`) VALUES ( 13, 7, now());
+
+
+CREATE TABLE `feignclientdb`.`invoicelines` ( 
+	`id` INT NOT NULL AUTO_INCREMENT , 
+	`invoice_id` INT NOT NULL , 
+	`total` FLOAT NOT NULL , 
+	`total_tax` FLOAT NOT NULL , 
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (invoice_id) REFERENCES invoices(id) ON DELETE CASCADE
+) ENGINE = InnoDB; 
+
+INSERT INTO `feignclientdb`.`invoicelines`(`invoice_id`, `total`, `total_tax`) VALUES ( 1, 2.60, 0.29);
+INSERT INTO `feignclientdb`.`invoicelines`(`invoice_id`, `total`, `total_tax`) VALUES ( 1, 2.28, 0.41);
+INSERT INTO `feignclientdb`.`invoicelines`(`invoice_id`, `total`, `total_tax`) VALUES ( 1, 5, 0.95);
+INSERT INTO `feignclientdb`.`invoicelines`(`invoice_id`, `total`, `total_tax`) VALUES ( 2, 6.37, 0.70);
+INSERT INTO `feignclientdb`.`invoicelines`(`invoice_id`, `total`, `total_tax`) VALUES ( 3, 5, 0.75);
+INSERT INTO `feignclientdb`.`invoicelines`(`invoice_id`, `total`, `total_tax`) VALUES ( 3, 7.04, 0.77);
+INSERT INTO `feignclientdb`.`invoicelines`(`invoice_id`, `total`, `total_tax`) VALUES ( 3, 5.92, 1.25);
+INSERT INTO `feignclientdb`.`invoicelines`(`invoice_id`, `total`, `total_tax`) VALUES ( 4, 1.33, 0.21);
+
+
+
+
+
+
+Agregar pedido
+
+Post a locahost8082
+{
+	"client_id": 1,
+	"lines": [{
+			"item": {
+				"id": 1,
+				"name": "Rice",
+				"description": "Rice description",
+				"date_added": "2020-03-31T19:50:27.000+0000"
+			},
+			"amount": 1,
+			"unit_price": 1.35,
+			"tax": 0.11
+		}, {
+			"item": {
+				"id": 2,
+				"name": "Pasta",
+				"description": "Pasta description",
+				"date_added": "2020-03-31T19:50:27.000+0000"
+			},
+			"amount": 1,
+			"unit_price": 1.25,
+			"tax": 0.11
+		}, {
+			"item": {
+				"id": 3,
+				"name": "Syrup",
+				"description": "Syrup description",
+				"date_added": "2020-03-31T19:50:27.000+0000"
+			},
+			"amount": 2,
+			"unit_price": 1.14,
+			"tax": 0.18
+		}, {
+			"item": {
+				"id": 10,
+				"name": "Oranges",
+				"description": "Oranges description",
+				"date_added": "2020-03-31T19:50:27.000+0000"
+			},
+			"amount": 4,
+			"unit_price": 1.25,
+			"tax": 0.19
+		}
+	],
+	"order_date": "2020-03-31T19:50:27.000+0000"
+}
+
+
+
+
+
+post a clientes
+
+
+
+
+{
+	"id": 1,
+	"name": "Lucas",
+	"surname": "Poggi",
+	"email": "lucas@poggi.com",
+	"phone": "+34654987321",
+	"id_card": "45783514A",
+	"orders":[{
+	"client_id": 1,
+	"lines": [{
+			"item": {
+				"id": 1,
+				"name": "Rice",
+				"description": "Rice description",
+				"date_added": "2020-03-31T19:50:27.000+0000"
+			},
+			"amount": 1,
+			"unit_price": 1.35,
+			"tax": 0.11
+		}, {
+			"item": {
+				"id": 2,
+				"name": "Pasta",
+				"description": "Pasta description",
+				"date_added": "2020-03-31T19:50:27.000+0000"
+			},
+			"amount": 1,
+			"unit_price": 1.25,
+			"tax": 0.11
+		}, {
+			"item": {
+				"id": 3,
+				"name": "Syrup",
+				"description": "Syrup description",
+				"date_added": "2020-03-31T19:50:27.000+0000"
+			},
+			"amount": 2,
+			"unit_price": 1.14,
+			"tax": 0.18
+		}, {
+			"item": {
+				"id": 10,
+				"name": "Oranges",
+				"description": "Oranges description",
+				"date_added": "2020-03-31T19:50:27.000+0000"
+			},
+			"amount": 4,
+			"unit_price": 1.25,
+			"tax": 0.19
+		}
+	],
+	"order_date": "2020-03-31T19:50:27.000+0000"
+}]
+}
+
+
+
+
+
+delete from order_lines where id > 55;
+delete from items where id > 11;
+delete from orders WHERE id > 31;
